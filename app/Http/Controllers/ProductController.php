@@ -2,21 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
-use App\Http\Requests\Category\StoreCategoryRequest;
-use App\Http\Requests\Category\UpdateCategoryRequest;
+use App\Http\Requests\Product\StoreProductRequest;
+use App\Http\Requests\Product\UpdateProductRequest;
+use App\Models\Product;
 
-class CategoryController extends Controller
+class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $categories = Category::get();
+        $products = Product::get();
         return response()->json([
-            'message' => 'Show all categories!',
-            'data' => $categories
+            'message' => 'Show all products!',
+            'data' => $products
         ]);
     }
 
@@ -31,37 +31,39 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreCategoryRequest $request)
+    public function store(StoreProductRequest $request)
     {
         $name = $request->input('name');
+        $description = $request->input('description');
         $enable = $request->boolean('enable');
 
-        $category = Category::create([
+        $product = Product::create([
             'name' => $name,
+            'description' => $description,
             'enable' => $enable
         ]);
 
         return response()->json([
-            'message' => 'Category has been created!',
-            'data' => $category
+            'message' => 'Product has been created!',
+            'data' => $product
         ], 201);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Category $category)
+    public function show(Product $product)
     {
         return response()->json([
-            'message' => 'Show category',
-            'data' => $category
+            'message' => 'Show product!',
+            'data' => $product
         ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Category $category)
+    public function edit(Product $product)
     {
         //
     }
@@ -69,31 +71,33 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCategoryRequest $request, Category $category)
+    public function update(UpdateProductRequest $request, Product $product)
     {
         $name = $request->input('name');
+        $description = $request->input('description');
         $enable = $request->boolean('enable');
 
-        $category->update([
+        $product->update([
             'name' => $name,
+            'description' => $description,
             'enable' => $enable
         ]);
 
         return response()->json([
-            'message' => 'Category has been updated!',
-            'data' => $category
+            'message' => 'Product has been updated!',
+            'data' => $product
         ]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Category $category)
+    public function destroy(Product $product)
     {
-        $category->delete();
+        $product->delete();
 
         return response()->json([
-            'message' => 'Category has been deleted!',
+            'message' => 'Product has been deleted!',
             'data' => null
         ]);
     }
