@@ -21,6 +21,15 @@ class CategoryController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     */
+    public function table()
+    {
+        $categories = Category::paginate(10);
+        return view('category.index', compact('categories'));
+    }
+
+    /**
      * Show the form for creating a new resource.
      */
     public function create()
@@ -34,7 +43,7 @@ class CategoryController extends Controller
     public function store(StoreCategoryRequest $request)
     {
         $name = $request->input('name');
-        $enable = $request->boolean('enable');
+        $enable = $request->boolean('enable', false);
 
         $category = Category::create([
             'name' => $name,
@@ -72,7 +81,7 @@ class CategoryController extends Controller
     public function update(UpdateCategoryRequest $request, Category $category)
     {
         $name = $request->input('name');
-        $enable = $request->boolean('enable');
+        $enable = $request->boolean('enable', $category->enable);
 
         $category->update([
             'name' => $name,
