@@ -26,4 +26,4 @@ Route::get('/files', [ImageController::class, 'table']);
 
 Route::get('/product', [ProductController::class, 'table']);
 Route::get('/product/create', [ProductController::class, 'create']);
-Route::get('/product/{product', [ProductController::class, 'edit']);
+Route::get('/product/{product}', [ProductController::class, 'edit']);

@@ -22,6 +22,15 @@ class ImageController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     */
+    public function table()
+    {
+        $images = Image::paginate(10);
+        return view('files.index', compact('images'));
+    }
+
+    /**
      * Show the form for creating a new resource.
      */
     public function create()
@@ -84,7 +93,7 @@ class ImageController extends Controller
         $enable = $request->boolean('enable');
 
         /** Set default image */
-        $file = asset('images/produk/produk1.jpg');
+        $file = $image->file;
         if($request->hasFile('file')) {
             $file = $request->file('file')->store('images');
             $file = Storage::url($file);

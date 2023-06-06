@@ -34,5 +34,5 @@ Route::delete('product/{product}', [ProductController::class, 'destroy'])->name(
 Route::get('images', [ImageController::class, 'index'])->name('api.image.index');
 Route::post('images', [ImageController::class, 'store'])->name('api.image.store');
 Route::get('image/{image}', [ImageController::class, 'show'])->name('api.image.show');
-Route::post('image/{image}', [ImageController::class, 'update'])->name('api.image.update');
+Route::put('image/{image}', [ImageController::class, 'update'])->name('api.image.update');
 Route::delete('image/{image}', [ImageController::class, 'destroy'])->name('api.image.destroy');

@@ -24,7 +24,7 @@ class StoreImageRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255'],
             'file' => ['required', 'file'],
-            'enable' => ['required', 'boolean']
+            'enable' => ['boolean']
         ];
     }
 }
