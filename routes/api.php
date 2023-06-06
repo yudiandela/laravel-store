@@ -1,8 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,3 +29,10 @@ Route::post('product', [ProductController::class, 'store']);
 Route::get('product/{product}', [ProductController::class, 'show']);
 Route::put('product/{product}', [ProductController::class, 'update']);
 Route::delete('product/{product}', [ProductController::class, 'destroy']);
+
+/** Mapping route API images */
+Route::get('images', [ImageController::class, 'index']);
+Route::post('images', [ImageController::class, 'store']);
+Route::get('image/{image}', [ImageController::class, 'show']);
+Route::post('image/{image}', [ImageController::class, 'update']);
+Route::delete('image/{image}', [ImageController::class, 'destroy']);
