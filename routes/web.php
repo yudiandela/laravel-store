@@ -1,8 +1,10 @@
 <?php
 
-use App\Http\Controllers\CategoryController;
 use App\Models\Category;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ImageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,4 +22,8 @@ Route::get('/', function () {
 });
 
 Route::get('/category', [CategoryController::class, 'table']);
-Route::get('/category/create', [CategoryController::class, 'create']);
+Route::get('/files', [ImageController::class, 'table']);
+
+Route::get('/product', [ProductController::class, 'table']);
+Route::get('/product/create', [ProductController::class, 'create']);
+Route::get('/product/{product', [ProductController::class, 'edit']);
