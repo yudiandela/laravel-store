@@ -21,9 +21,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/category', [CategoryController::class, 'table']);
-Route::get('/files', [ImageController::class, 'table']);
+Route::get('/category', [CategoryController::class, 'table'])->name('category.table');
+Route::get('/files', [ImageController::class, 'table'])->name('file.table');
 
-Route::get('/product', [ProductController::class, 'table']);
-Route::get('/product/create', [ProductController::class, 'create']);
-Route::get('/product/{product}', [ProductController::class, 'edit']);
+Route::get('/product', [ProductController::class, 'table'])->name('product.table');
+Route::get('/product/create', [ProductController::class, 'create'])->name('product.create');
+Route::get('/product/{product}', [ProductController::class, 'edit'])->name('product.edit');

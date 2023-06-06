@@ -19,13 +19,13 @@
                 <div class="collapse navbar-collapse py-2" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0 d-flex gap-4">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Categories</a>
+                            <a class="nav-link {{ Route::is('category.table') ? 'active' : '' }}" aria-current="page" href="{{ route('category.table') }}">Categories</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="#">Products</a>
+                            <a class="nav-link {{ Route::is('product.table') ? 'active' : '' }}" aria-current="page" href="{{ route('product.table') }}">Products</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="#">Images</a>
+                            <a class="nav-link {{ Route::is('file.table') ? 'active' : '' }}" aria-current="page" href="{{ route('file.table') }}">Images</a>
                         </li>
                     </ul>
                 </div>
