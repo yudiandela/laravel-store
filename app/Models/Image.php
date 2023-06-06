@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Image extends Model
 {
@@ -30,4 +31,14 @@ class Image extends Model
         'created_at',
         'updated_at',
     ];
+
+    /**
+     * The products that belong to the Image
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function products(): BelongsToMany
+    {
+        return $this->belongsToMany(Product::class, 'product_image');
+    }
 }
