@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Image;
+use App\Models\Product;
+use App\Models\Category;
+use App\Http\Resources\ProductResource;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Product\StoreProductRequest;
 use App\Http\Requests\Product\UpdateProductRequest;
-use App\Http\Resources\ProductResource;
-use App\Models\Product;
 
 class ProductController extends Controller
 {
@@ -35,7 +38,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::get();
+        return view('product.createOrUpdate', compact('categories'));
     }
 
     /**
@@ -52,6 +56,24 @@ class ProductController extends Controller
             'description' => $description,
             'enable' => $enable
         ]);
+
+        if($request->hasFile('file')) {
+            $file = $request->file('file')->store('images');
+            $file = Storage::url($file);
+
+            $image = Image::create([
+                'name' => $name,
+                'file' => $file,
+                'enable' => $enable
+            ]);
+
+            $product->images()->sync($image);
+        }
+
+        $category = $request->input('category');
+        if($category) {
+            $product->categories()->sync($category);
+        }
 
         return response()->json([
             'message' => 'Product has been created!',
@@ -76,7 +98,8 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        $categories = Category::get();
+        return view('product.createOrUpdate', compact('categories', 'product'));
     }
 
     /**
@@ -93,6 +116,24 @@ class ProductController extends Controller
             'description' => $description,
             'enable' => $enable
         ]);
+
+        if($request->hasFile('file')) {
+            $file = $request->file('file')->store('images');
+            $file = Storage::url($file);
+
+            $image = Image::create([
+                'name' => $name,
+                'file' => $file,
+                'enable' => $enable
+            ]);
+
+            $image->products()->sync($product);
+        }
+
+        $category = $request->input('category');
+        if($category) {
+            $product->categories()->sync($category);
+        }
 
         return response()->json([
             'message' => 'Product has been updated!',

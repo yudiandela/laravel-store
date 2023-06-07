@@ -2,11 +2,11 @@
 
 @section('content')
 <div class="container my-5">
-    <div class="d-flex align-items-center justify-content-between mb-4">
+    <div class="mb-4 d-flex align-items-center justify-content-between">
         <h1 class="fs-4">Product List</h1>
-        <button type="button" class="btn btn-primary" onclick="editProduct()" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        <a href="{{ route('product.create') }}" class="btn btn-primary">
             Add new product
-        </button>
+        </a>
     </div>
 
     <table class="table table-striped table-hover">
@@ -34,8 +34,8 @@
                         {{ $product->categories->map(fn($category) => $category->name)->join(', ') }}
                     </td>
                     <td class="py-3">{{ $product->enable ? 'Enable' : 'Disable' }}</td>
-                    <td class="py-3 d-flex gap-3">
-                        <button type="button" class="btn btn-sm btn-warning">Edit</button>
+                    <td class="gap-3 py-3 d-flex">
+                        <a href="{{ route('product.edit', $product->id) }}" class="btn btn-sm btn-warning">Edit</a>
                         <button type="button" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{{ $product->id }}" class="btn btn-sm btn-danger delete-product">Delete</button>
                     </td>
                 </tr>
@@ -64,7 +64,7 @@
 
                     <input type="hidden" name="product_id">
 
-                    <div class="d-flex justify-content-end gap-3">
+                    <div class="gap-3 d-flex justify-content-end">
                         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary">Yes, I'am sure</button>
                     </div>
